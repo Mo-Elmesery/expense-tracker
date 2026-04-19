@@ -1,4 +1,6 @@
 using ExpenseTracker.Api.Data;
+using ExpenseTracker.Api.Models;
+using ExpenseTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,11 @@ builder.Services.AddCors(options =>
             .AllowAnyOrigin();
     });
 });
+
+// JWT Settings
+var jwtSection = builder.Configuration.GetSection("JwtSettings");
+builder.Services.Configure<JwtSettings>(jwtSection);
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

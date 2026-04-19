@@ -11,6 +11,7 @@ public class ExpenseTrackerDbContext : DbContext
     }
 
     public DbSet<Expense> Expenses => Set<Expense>();
+    public DbSet<User> Users => Set<User>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,6 +21,14 @@ public class ExpenseTrackerDbContext : DbContext
             entity.Property(x => x.Amount).HasColumnType("decimal(18,2)");
             entity.Property(x => x.Category).HasMaxLength(100).IsRequired();
             entity.Property(x => x.Notes).HasMaxLength(1000);
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.Property(x => x.Email).HasMaxLength(256).IsRequired().IsUnicode();
+            entity.Property(x => x.UserName).HasMaxLength(100).IsRequired();
+            entity.Property(x => x.PasswordHash).IsRequired();
+            entity.HasIndex(x => x.Email).IsUnique();
         });
     }
 }
