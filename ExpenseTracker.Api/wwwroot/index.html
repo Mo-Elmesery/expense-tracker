@@ -17,6 +17,17 @@
       <div class="hero-badge">EGP</div>
     </header>
 
+    <div class="auth-container">
+      <div id="auth-links">
+        <button class="btn btn-primary" onclick="showLogin()">تسجيل الدخول</button>
+        <button class="btn btn-secondary" onclick="showRegister()">إنشاء حساب</button>
+      </div>
+      <div id="profile-section" class="hidden">
+        <span>مرحباً، <strong id="profile-email"></strong></span>
+        <button class="btn btn-outline" id="logout-btn">خروج</button>
+      </div>
+    </div>
+
     <main class="grid">
       <section class="panel form-panel">
         <h2>إضافة مصروف جديد</h2>
@@ -168,6 +179,65 @@
     </main>
   </div>
 
+  <!-- Auth Modals -->
+  <div id="login-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeAuth()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>تسجيل الدخول</h2>
+        <button class="modal-close" onclick="closeAuth()" aria-label="إغلاق">&times;</button>
+      </div>
+      <form id="login-form">
+        <label>
+          <span>البريد الإلكتروني</span>
+          <input id="login-email" name="email" type="email" required />
+        </label>
+
+        <label>
+          <span>كلمة المرور</span>
+          <input id="login-password" name="password" type="password" required />
+        </label>
+
+        <button type="submit">تسجيل الدخول</button>
+        <p id="login-message" class="form-message" aria-live="polite"></p>
+
+        <p class="form-footer">ليس لديك حساب؟ <a href="#" onclick="showRegister()">سجل الآن</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="register-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeAuth()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>إنشاء حساب جديد</h2>
+        <button class="modal-close" onclick="closeAuth()" aria-label="إغلاق">&times;</button>
+      </div>
+      <form id="register-form">
+        <label>
+          <span>البريد الإلكتروني</span>
+          <input id="register-email" name="email" type="email" required />
+        </label>
+
+        <label>
+          <span>اسم المستخدم</span>
+          <input id="register-username" name="username" type="text" required />
+        </label>
+
+        <label>
+          <span>كلمة المرور</span>
+          <input id="register-password" name="password" type="password" required />
+        </label>
+
+        <button type="submit">إنشاء حساب</button>
+        <p id="register-message" class="form-message" aria-live="polite"></p>
+
+        <p class="form-footer">لديك حساب بالفعل؟ <a href="#" onclick="showLogin()">سجل دخول</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
